@@ -1,10 +1,12 @@
 import { FC, memo, useCallback, MouseEvent } from 'react'
 import ListItem from '@material-ui/core/ListItem'
 import { makeStyles, Theme } from '@material-ui/core/styles'
+import clsx from 'clsx';
 
 interface TaskItemProps {
     id: string;
     name: string;
+    isCurrentTask: boolean;
     setCurrentTaskId(id: string): void;
 }
 
@@ -20,24 +22,25 @@ const useStyles = makeStyles((theme: Theme) => ({
       marginBottom: 10,
     }
   },
+  selected: {
+        background: '#B6F3ED',
+    },
 }));
 
-const TaskItem: FC<TaskItemProps> = ({ id, name, setCurrentTaskId }) => {
+const TaskItem: FC<TaskItemProps> = ({ id, name, setCurrentTaskId, isCurrentTask }) => {
     const classes = useStyles()
 
     const handleClick = useCallback(
         (e: MouseEvent<HTMLElement>) => {
-            const id = e.currentTarget.getAttribute('data-id')
-            id && setCurrentTaskId(id)
+            setCurrentTaskId(id)
         },
-        [setCurrentTaskId],
+        [setCurrentTaskId, id],
     )
 
     return (
         <ListItem
             onClick={handleClick}
-            data-id={id}
-            className={classes.root}
+            className={clsx(classes.root, isCurrentTask && classes.selected)}
         >
             {name}
         </ListItem>

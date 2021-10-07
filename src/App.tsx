@@ -70,6 +70,7 @@ const App: FC = () => {
           <TaskList
             tasks={tasks}
             setCurrentTaskId={setCurrentTaskId}
+            currentTaskId={currentTaskId}
           />
         </Grid>
         <Grid item xs={6}>

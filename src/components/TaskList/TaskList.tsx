@@ -7,8 +7,9 @@ import TaskItem from '../TaskItem'
 import { ITask } from '../../interfaces'
 
 interface TaskListProps {
-    tasks: ITask[];
-    setCurrentTaskId(id: string): void;
+  tasks: ITask[];
+  currentTaskId: string;
+  setCurrentTaskId(id: string): void;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -22,21 +23,23 @@ const useStyles = makeStyles((theme: Theme) => ({
   }
 }))
 
-const TaskList: FC<TaskListProps> = ({ tasks, setCurrentTaskId }) => {
+const TaskList: FC<TaskListProps> = ({ tasks, setCurrentTaskId, currentTaskId }) => {
   const classes = useStyles()
 
   return (
     <Card className={classes.root}>
       <Typography className={classes.header}>Tasks</Typography>
       <List>
-        {tasks.map((task, index) => (
-          <TaskItem
+        {tasks.map((task, index) => {
+          const isCurrentTask = currentTaskId === task.id
+          return (<TaskItem
             key={task.id}
             id={task.id}
             name={`${index+1}. ${task.name}`}
             setCurrentTaskId={setCurrentTaskId}
-          />
-        ))}
+            isCurrentTask={isCurrentTask}
+          />)
+        })}
       </List>
     </Card>
   )
