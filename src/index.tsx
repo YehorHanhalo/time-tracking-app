@@ -1,17 +1,25 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import { ApolloProvider, ApolloClient, InMemoryCache } from '@apollo/client'
+import { SnackbarProvider } from 'notistack'
 import App from './App';
-import reportWebVitals from './reportWebVitals';
+import './index.css'
+
+const client = new ApolloClient({
+  uri: 'https://graph.proworkflow.com/DevTestyehor/',
+  headers: {
+    Authorization: "AHWO-B7UC-QHCG-PHDU-PWFPHYI-TR114857",
+  },
+  cache: new InMemoryCache()
+})
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <ApolloProvider client={client}>
+      <SnackbarProvider maxSnack={3}>
+        <App />
+      </SnackbarProvider>
+    </ApolloProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
