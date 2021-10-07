@@ -18,6 +18,7 @@ const App: FC = () => {
   const [tasks, setTasks] = useState<ITask[]>([])
 
   const { data, loading, error: getTasksError, refetch } = useQuery<ITasksQueryData>(getTasks)
+
   const [startTimerById, { error: startTimerError }] = useMutation(startTimer)
   const [stopTimerById, { error: stopTimerError }] = useMutation(stopTimer)
 
