@@ -8,7 +8,7 @@ import './index.css'
 const client = new ApolloClient({
   uri: 'https://graph.proworkflow.com/DevTestyehor/',
   headers: {
-    Authorization: "AHWO-B7UC-QHCG-PHDU-PWFPHYI-TR114857",
+    Authorization: `${process.env.REACT_APP_AUTH}`,
   },
   cache: new InMemoryCache()
 })
