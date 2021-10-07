@@ -13,7 +13,12 @@ const useStyles = makeStyles(() => ({
 
 const Timer = ({ isStartedTimer, isCurrentTask, shouldRefreshTimer, setShouldRefreshTimer }) => {
   const classes = useStyles()
-  const [milliseconds, _status, start, _pause, stop, restart] = useStopwatch({ interval: 1000 });
+  const stopWatch = useStopwatch({ interval: 1000 });
+
+  const milliseconds = stopWatch[0]
+  const start = stopWatch[2]
+  const stop = stopWatch[4]
+  const restart = stopWatch[5]
 
   useEffect(() => {
     isStartedTimer ? start() : stop()
