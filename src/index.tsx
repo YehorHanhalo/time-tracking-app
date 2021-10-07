@@ -6,7 +6,7 @@ import App from './App';
 import './index.css'
 
 const client = new ApolloClient({
-  uri: 'https://graph.proworkflow.com/DevTestyehor/',
+  uri: `${process.env.REACT_APP_URI}`,
   headers: {
     Authorization: `${process.env.REACT_APP_AUTH}`,
   },
